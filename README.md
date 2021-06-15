@@ -1,3 +1,3 @@
-Utility to remind you to get up and walk.
+Utility to remind you to work and stretch at regular intervals.
 
 - Notification tone from: https://notificationsounds.com/message-tones/pristine-609
