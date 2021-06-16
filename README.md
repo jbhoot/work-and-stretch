@@ -1,4 +1,4 @@
-A tiny health utility to remind you to work and stretch at regular intervals. It infinitely keeps notifying you every specified number of work and stretch durations to do those activities respectively.
+A tiny, health-oriented, command-line utility to remind you to work and stretch at regular intervals. It infinitely keeps notifying you every specified number of work and stretch durations to do those activities respectively.
 
 ## Prerequisites
 
