@@ -25,7 +25,7 @@ Work for 15 minutes
 
 ## What should I do during stretch activity?
 
-At the very least, get up and walk.
+At the very least, get up and walk around.
 
 Personally, I like to carry out the stretching part of the cardio + strength + stretch exercise combination. Yoga stretches are the quickest and the simplest.
 
