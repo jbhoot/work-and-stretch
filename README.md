@@ -1,4 +1,4 @@
-Utility to remind you to work and stretch at regular intervals.
+A tiny health utility to remind you to work and stretch at regular intervals. It infinitely keeps notifying you every specified number of work and stretch durations to do those activities respectively.
 
 ## Prerequisites
 
@@ -22,6 +22,12 @@ Stretch for 3 minutes
 Work for 15 minutes
 # and so on, until you quit the program
 ```
+
+## What should I do during stretch activity?
+
+At the very least, get up and walk.
+
+Personally, I like to carry out the stretching part of the cardio + strength + stretch exercise combination. Yoga stretches are the quickest and the simplest.
 
 ## Credits
 
