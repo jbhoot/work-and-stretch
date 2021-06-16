@@ -2,7 +2,7 @@ A tiny, health-oriented, command-line utility to remind you to work and stretch 
 
 ## Prerequisites
 
-- `mpv` to play the alert tone. `nix-shell` will automatically installed the dependency.
+- `mpv` to play the alert tone.
 
 ## How it works
 
