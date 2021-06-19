@@ -7,19 +7,21 @@ A tiny, health-oriented, command-line utility to remind you to work and stretch 
 ## How it works
 
 ```
-[nix-shell:~/projects/work-and-stretch/_build/default]$ ./work_and_stretch.exe --help
+[nix-shell:~/projects/work-and-stretch_build/default]$ ./work_and_stretch.exe -help
 Stretch and work at regular intervals
-  --work Work duration in minutes. Default is 10 minutes.
-  --stretch Break duration in minutes. Default is 2 minutes.
+  -work Work duration in seconds. Default is 600 seconds (= 10 minutes).
+  -stretch Break duration in seconds. Default is 120 seconds (= 2 minutes).
   -help  Display this list of options
   --help  Display this list of options
-  
-[nix-shell:~/projects/work-and-stretch/_build/default]$ ./work_and_stretch.exe --work 15 --stretch 3
-Work for 15 minutes
+
+[nix-shell:~/projects/work-and-stretch]$ ./_build/default/work_and_stretch.exe -work 720 -stretch 90
+Work for 12m00s. Time left: 11m47s
 # plays a ping after 15 minutes
-Stretch for 3 minutes
-# plays a ping after 3 minutes
-Work for 15 minutes
+
+Stretch for 01m30s. Time left: 01m30s
+# plays a ping after 90 seconds = 1m30s
+
+Work for 12m00s. Time left: 12m00s
 # and so on, until you quit the program
 ```
 

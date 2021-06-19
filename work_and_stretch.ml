@@ -7,12 +7,13 @@ let make_activity_status_generator activity =
     | Work duration -> ("Work", duration)
     | Stretch duration -> ("Stretch", duration)
     in 
-    Printf.sprintf "\r%s for %d minutes. Time left: %02d.%02d " activity_name (duration / 60)
+    Printf.sprintf "\r%s for %02dm%02ds. Time left: %02dm%02ds " activity_name (duration / 60) (duration mod 60)
 
 let rec run_activity activity generate_activity_status =
     match activity with
     | Work 0
     | Stretch 0 -> 
+        print_string (generate_activity_status 0 0);
         print_endline "";
         let _ = Sys.command "mpv ./pristine.mp3" in
         ()
@@ -32,11 +33,11 @@ let rec run_activities current_activity next_activity =
     run_activities next_activity current_activity;
     ()
 
-let stretch_duration = ref 2
-let work_duration = ref 10
+let stretch_duration = ref 120
+let work_duration = ref 600
 let arg_spec = [
-    ("--work", Arg.Set_int work_duration, Printf.sprintf "Work duration in minutes. Default is %d minutes." !work_duration);
-    ("--stretch", Arg.Set_int stretch_duration, Printf.sprintf "Break duration in minutes. Default is %d minutes." !stretch_duration);
+    ("-work", Arg.Set_int work_duration, Printf.sprintf "Work duration in seconds. Default is %d seconds (= %d minutes)." !work_duration (!work_duration / 60));
+    ("-stretch", Arg.Set_int stretch_duration, Printf.sprintf "Break duration in seconds. Default is %d seconds (= %d minutes)." !stretch_duration (!stretch_duration / 60));
 ]
 let anon_inputs = ref []
 let anon_args input = 
@@ -44,4 +45,4 @@ let anon_args input =
 
 let () = 
     Arg.parse arg_spec anon_args "Stretch and work at regular intervals";
-    run_activities (Work (!work_duration * 60)) (Stretch (!stretch_duration * 60))
+    run_activities (Work !work_duration) (Stretch !stretch_duration)
