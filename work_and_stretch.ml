@@ -2,10 +2,16 @@ type activity =
     | Work of int
     | Stretch of int
 
-let run time =
-    let () = Unix.sleep (time * 60) in
-    let _ = Sys.command "mpv ./pristine.mp3" in
-    ()    
+let rec run duration =
+    if duration > 0 then (
+        let () = print_string (Printf.sprintf "\rTime remaining: %d" duration) in
+        let () = flush stdout in
+        let () = Unix.sleep 60 in
+        run (duration - 1)
+    ) else (
+        let _ = Sys.command "mpv ./pristine.mp3" in
+        ()
+    )
 
 let rec run_activity current_activity next_activity =
     let msg, duration = match current_activity with
