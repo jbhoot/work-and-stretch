@@ -2,25 +2,35 @@ type activity =
     | Work of int
     | Stretch of int
 
-let rec run duration =
-    if duration > 0 then (
-        let () = print_string (Printf.sprintf "\rTime remaining: %d" duration) in
-        let () = flush stdout in
-        let () = Unix.sleep 60 in
-        run (duration - 1)
-    ) else (
+let make_activity_status_generator activity =
+    let activity_name, duration = match activity with
+    | Work duration -> ("Work", duration)
+    | Stretch duration -> ("Stretch", duration)
+    in 
+    Printf.sprintf "\r%s for %d minutes. Time left: %02d.%02d" activity_name (duration / 60)
+
+let rec run_activity activity generate_activity_status =
+    match activity with
+    | Work 0
+    | Stretch 0 -> 
+        print_endline "";
         let _ = Sys.command "mpv ./pristine.mp3" in
         ()
-    )
+    | Work duration ->
+        print_string (generate_activity_status (duration / 60) (duration mod 60));
+        flush stdout;
+        Unix.sleep 1;
+        run_activity (Work (duration - 1)) generate_activity_status
+    | Stretch duration -> 
+        print_string (generate_activity_status (duration / 60) (duration mod 60));
+        flush stdout;
+        Unix.sleep 1;
+        run_activity (Stretch (duration - 1)) generate_activity_status
 
-let rec run_activity current_activity next_activity =
-    let msg, duration = match current_activity with
-        | Work duration -> (Printf.sprintf "Work for %d minutes" duration, duration)
-        | Stretch duration -> (Printf.sprintf "Stretch for %d minutes" duration, duration)
-    in
-    print_endline msg;
-    run duration;
-    run_activity next_activity current_activity
+let rec run_activities current_activity next_activity =
+    run_activity current_activity (make_activity_status_generator current_activity);
+    run_activities next_activity current_activity;
+    ()
 
 let stretch_duration = ref 2
 let work_duration = ref 10
@@ -34,4 +44,4 @@ let anon_args input =
 
 let () = 
     Arg.parse arg_spec anon_args "Stretch and work at regular intervals";
-    run_activity (Work !work_duration) (Stretch !stretch_duration)
+    run_activities (Work (!work_duration * 60)) (Stretch (!stretch_duration * 60))
