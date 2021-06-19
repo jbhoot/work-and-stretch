@@ -7,7 +7,7 @@ let make_activity_status_generator activity =
     | Work duration -> ("Work", duration)
     | Stretch duration -> ("Stretch", duration)
     in 
-    Printf.sprintf "\r%s for %d minutes. Time left: %02d.%02d" activity_name (duration / 60)
+    Printf.sprintf "\r%s for %d minutes. Time left: %02d.%02d " activity_name (duration / 60)
 
 let rec run_activity activity generate_activity_status =
     match activity with
