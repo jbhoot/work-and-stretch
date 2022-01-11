@@ -2,7 +2,7 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/1f06456eabe9f768f87a26d3ff8b2dc14eb4046d";
+    nixpkgs.url = "github:NixOS/nixpkgs";
   };
 
   outputs = { self, nixpkgs }:
