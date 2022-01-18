@@ -6,24 +6,28 @@
   };
 
   outputs = { self, nixpkgs }:
-    let
-      system = "x86_64-darwin";
-      pkgs = import nixpkgs { inherit system; };
+  let
+    systems = [ "x86_64-darwin" "aarch64-darwin" "x86_64-linux" ];
+    createDevShell = system: 
+    let 
+      pkgs = import nixpkgs {inherit system;};
     in
-      {
-        devShell.${system} = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            ocaml
-            ocamlPackages.findlib
-            dune_2
-            ocamlPackages.ocaml-lsp
-            ocamlformat
-            ocamlPackages.utop
+    pkgs.mkShell {
+      buildInputs = [
+        pkgs.ocaml
+        pkgs.ocamlPackages.findlib
+        pkgs.dune_2
+        pkgs.ocamlPackages.ocaml-lsp
+        pkgs.ocamlformat
+        pkgs.ocamlPackages.utop
 
-            ocamlPackages.re
+        pkgs.ocamlPackages.re
 
-            mpv
-          ];
-        };
-      };
+        pkgs.mpv
+      ];
+    };
+  in
+  {
+    devShell = nixpkgs.lib.genAttrs systems createDevShell;
+  };
 }
