@@ -10,20 +10,20 @@
       system = "x86_64-darwin";
       pkgs = import nixpkgs { inherit system; };
     in
-      {
-        devShell.${system} = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            ocaml
-            ocamlPackages.findlib
-            dune_2
-            ocamlPackages.ocaml-lsp
-            ocamlformat
-            ocamlPackages.utop
+    {
+      devShell.${system} = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          ocaml
+          ocamlPackages.findlib
+          dune_2
+          ocamlPackages.ocaml-lsp
+          ocamlformat
+          ocamlPackages.utop
 
-            ocamlPackages.re
+          ocamlPackages.re
 
-            mpv
-          ];
-        };
+          mpv
+        ];
       };
+    };
 }
