@@ -3,9 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
+    mypkgs.url = "github:jayesh-bhoot/nix-pkgs";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, mypkgs }:
     let
       systems = [ "x86_64-darwin" "aarch64-darwin" "x86_64-linux" ];
       createDevShell = system:
@@ -19,6 +20,7 @@
             pkgs.dune_2
             pkgs.ocamlPackages.ocaml-lsp
             pkgs.ocamlformat
+            mypkgs.packages.${system}.ocamlformat-rpc
             pkgs.ocamlPackages.utop
 
             pkgs.ocamlPackages.re
