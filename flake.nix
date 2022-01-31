@@ -7,23 +7,27 @@
 
   outputs = { self, nixpkgs }:
     let
-      system = "x86_64-darwin";
-      pkgs = import nixpkgs { inherit system; };
+      systems = [ "x86_64-darwin" "aarch64-darwin" "x86_64-linux" ];
+      createDevShell = system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in
+        pkgs.mkShell {
+          buildInputs = [
+            pkgs.ocaml
+            pkgs.ocamlPackages.findlib
+            pkgs.dune_2
+            pkgs.ocamlPackages.ocaml-lsp
+            pkgs.ocamlformat
+            pkgs.ocamlPackages.utop
+
+            pkgs.ocamlPackages.re
+
+            pkgs.mpv
+          ];
+        };
     in
     {
-      devShell.${system} = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          ocaml
-          ocamlPackages.findlib
-          dune_2
-          ocamlPackages.ocaml-lsp
-          ocamlformat
-          ocamlPackages.utop
-
-          ocamlPackages.re
-
-          mpv
-        ];
-      };
+      devShell = nixpkgs.lib.genAttrs systems createDevShell;
     };
 }
