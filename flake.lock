@@ -1,12 +1,45 @@
 {
   "nodes": {
+    "mypkgs": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1642681736,
+        "narHash": "sha256-wknev0UCPByBduB1F5NChMb2jo6kLlob6WQxNP5ZzYY=",
+        "owner": "jayesh-bhoot",
+        "repo": "nix-pkgs",
+        "rev": "7b499f55343d926f5e963751cffdddfe77ee2fcd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jayesh-bhoot",
+        "repo": "nix-pkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1641915206,
-        "narHash": "sha256-j4v3J5T6JiXu2VhgdirmF5CDlLO4xBy2+XyxMDJ9Cvg=",
+        "lastModified": 1641905687,
+        "narHash": "sha256-9q6+JOLCmkCe83HqV0x0KUmU8QdAhhUE5w2fgDmf1iY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9fd9e5e56e1aee370af97731c191c8f7572dcb2a",
+        "rev": "943c830a1cf63b0fec8cdbcbbc0b10cbcee5699d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1643634174,
+        "narHash": "sha256-LpfTneNuLmXuTyR4hPXtr92g1YAZymJUQxdHjTCi79w=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "589235201f2e0717bee4915bffff5330fa00ff41",
         "type": "github"
       },
       "original": {
@@ -17,7 +50,8 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "mypkgs": "mypkgs",
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },
